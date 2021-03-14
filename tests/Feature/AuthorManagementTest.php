@@ -5,9 +5,13 @@ namespace Tests\Feature;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use App\Models\Author;
+use Carbon\Carbon;
 
 class AuthorManagementTest extends TestCase
 {
+    use RefreshDatabase;
+
     /**
      * @test
      */
@@ -16,9 +20,13 @@ class AuthorManagementTest extends TestCase
         $this->withoutExceptionHandling();
         $response = $this->post('/author', [
             'name' => 'John Doe',
-            'dob' => '11-02-2021'
-          ]);
+            'dob' => '05/14/1988'
+        ]);
 
-        $this->assertCount(1, Author::all());
+        $auhtor = Author::all();
+
+        $this->assertCount(1, $auhtor);
+        $this->assertInstanceOf(Carbon::class, $auhtor->first()->dob);
+        $this->assertEquals('1988/05/14', $auhtor->first()->dob->format('Y/m/d'));
     }
 }
