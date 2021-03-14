@@ -9,14 +9,16 @@ use Tests\TestCase;
 class AuthorManagementTest extends TestCase
 {
     /**
-     * A basic feature test example.
-     *
-     * @return void
+     * @test
      */
-    public function test_example()
+    public function an_author_can_be_created()
     {
-        $response = $this->get('/');
+        $this->withoutExceptionHandling();
+        $response = $this->post('/author', [
+            'name' => 'John Doe',
+            'dob' => '11-02-2021'
+          ]);
 
-        $response->assertStatus(200);
+        $this->assertCount(1, Author::all());
     }
 }
