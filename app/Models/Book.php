@@ -15,10 +15,17 @@ class Book extends Model
      *
      * @var array
      */
-    protected $fillable = ['title', 'author'];
+    protected $fillable = ['title', 'author_id'];
 
     public function path()
     {
         return '/book/' . $this->id . '-' . Str::slug($this->title);
+    }
+
+    public function setAuthorIdAttribute($author)
+    {
+        $this->attributes['author_id'] = (Author::firstOrCreate([
+            'name' => $author
+        ]))->id;
     }
 }
