@@ -15,7 +15,13 @@ use Illuminate\Support\Facades\Route;
 
 require __DIR__ . '/auth.php';
 
-Route::post('/checkout/{book}', 'CheckoutBookController@store');
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
 
 Route::post('/author', 'AuthorsController@store');
 
@@ -25,11 +31,6 @@ Route::delete('/books/{book}', 'BooksController@destroy');
 
 Route::patch('/books/{book}', 'BooksController@update');
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::post('/checkout/{book}', 'CheckoutBookController@store');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
-
+Route::post('/checkin/{book}', 'CheckinBookController@store');
