@@ -60,7 +60,7 @@ class BookManagementTest extends TestCase
      */
     public function a_book_can_be_updated()
     {
-        // $this->withoutExceptionHandling();
+        $this->withoutExceptionHandling();
         $this->post('/books', $this->data());
 
         $book = Book::first();
@@ -81,7 +81,7 @@ class BookManagementTest extends TestCase
      */
     public function a_book_can_be_deleted()
     {
-        // $this->withoutExceptionHandling();
+        $this->withoutExceptionHandling();
         $this->post('/books', $this->data());
 
         $book = Book::first();
