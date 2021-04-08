@@ -10,8 +10,7 @@ class AuthorsController extends Controller
     //
     public function store()
     {
-        $author = Author::create($this->validateRequest());
-        // return redirect($author->path());
+        Author::create($this->validateRequest());
     }
 
     private function validateRequest()
